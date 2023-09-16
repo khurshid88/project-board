@@ -8,7 +8,7 @@ public class ProjectBoardApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ProjectBoardApplication.class, args);
-        System.out.println("Spring Boot project three");
+        System.out.println("Spring Boot project 11");
     }
 
 }
