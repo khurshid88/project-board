@@ -1,0 +1,27 @@
+
+spring:
+  # DATABASE
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/board?currentSchema=public
+    username: postgres
+    password: root123
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate.ddl-auto: update
+    show-swl: true
+    properties:
+      hibernate.format_sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+  file:
+    name: log.log
