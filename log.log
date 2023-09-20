@@ -1882,3 +1882,6 @@ Caused by: org.postgresql.util.PSQLException: ERROR: insert or update on table "
 2023-09-20T10:03:07.438+05:00  INFO 30235 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
 2023-09-20T10:03:07.511+05:00  INFO 30235 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
 2023-09-20T10:03:07.540+05:00  INFO 30235 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 5.355 seconds (process running for 6.532)
+2023-09-20T10:09:15.107+05:00  INFO 30235 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-20T10:09:15.308+05:00  INFO 30235 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-09-20T10:09:15.349+05:00  INFO 30235 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
