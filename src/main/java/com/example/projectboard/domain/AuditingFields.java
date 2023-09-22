@@ -29,10 +29,10 @@ public abstract class AuditingFields {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @LastModifiedDate
     @Column(nullable = false)
-    protected LocalDateTime modifiedAt;
+    protected LocalDateTime updatedAt;
 
     @LastModifiedBy
     @Column(nullable = false, length = 100)
-    protected String modifiedBy;
+    protected String updatedBy;
 
 }
