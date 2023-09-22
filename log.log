@@ -12,7 +12,7 @@
 2023-09-22T09:13:40.418+05:00 DEBUG 23421 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
 2023-09-22T09:13:40.511+05:00  INFO 23421 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
 2023-09-22T09:13:40.511+05:00  INFO 23421 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:13:40.511+05:00  INFO 23421 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
+2023-09-22T09:13:40.511+05:00  INFO 23421 --- [restartedMain] o.f.c.internal.license.VersionPrinter    :
 2023-09-22T09:13:40.520+05:00  INFO 23421 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2023-09-22T09:13:40.718+05:00  INFO 23421 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@263a0dbe
 2023-09-22T09:13:40.720+05:00  INFO 23421 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
@@ -54,7 +54,7 @@
 2023-09-22T09:15:11.503+05:00 DEBUG 23618 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
 2023-09-22T09:15:11.595+05:00  INFO 23618 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
 2023-09-22T09:15:11.596+05:00  INFO 23618 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:15:11.596+05:00  INFO 23618 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
+2023-09-22T09:15:11.596+05:00  INFO 23618 --- [restartedMain] o.f.c.internal.license.VersionPrinter    :
 2023-09-22T09:15:11.605+05:00  INFO 23618 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2023-09-22T09:15:11.766+05:00  INFO 23618 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@51874a4c
 2023-09-22T09:15:11.768+05:00  INFO 23618 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
@@ -76,29 +76,39 @@ Statement  : insert into article (id, content, created_at, created_by, updated_a
 2023-09-22T09:15:12.014+05:00  INFO 23618 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-09-22T09:15:12.040+05:00  INFO 23618 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 2023-09-22T09:15:12.044+05:00  INFO 23618 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-22T09:15:12.069+05:00  INFO 23618 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2023-09-22T09:15:12.069+05:00  INFO 23618 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger :
 
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-09-22T09:15:12.087+05:00 ERROR 23618 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.11.jar:6.0.11]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
@@ -115,58 +125,7 @@ Statement  : insert into article (id, content, created_at, created_by, updated_a
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
-Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:384) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$applyMigrations$1(DbMigrate.java:274) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:273) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$migrateAll$0(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:73) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.lambda$execute$0(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLConnection.lock(PostgreSQLConnection.java:96) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:143) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:98) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.lambda$migrate$0(Flyway.java:187) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:196) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:139) ~[flyway-core-9.16.0.jar:na]
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66) ~[spring-boot-autoconfigure-3.1.3.jar:3.1.3]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
-	... 23 common frames omitted
-Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:275) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:222) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:126) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.executeOnce(SqlMigrationExecutor.java:68) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.lambda$execute$0(SqlMigrationExecutor.java:57) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.DefaultExecutionStrategy.execute(DefaultExecutionStrategy.java:27) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:376) ~[flyway-core-9.16.0.jar:na]
-	... 42 common frames omitted
-Caused by: org.postgresql.util.PSQLException: ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_at" of relation "article" contains null values
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
@@ -178,72 +137,44 @@ Caused by: org.postgresql.util.PSQLException: ERROR: column "updated_at" of rela
 	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
 	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
 	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
-	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:201) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.ParsedSqlStatement.execute(ParsedSqlStatement.java:95) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:210) ~[flyway-core-9.16.0.jar:na]
-	... 48 common frames omitted
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
 
-2023-09-22T09:15:35.640+05:00  INFO 23693 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 23693 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:15:35.642+05:00  INFO 23693 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:15:35.688+05:00  INFO 23693 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:15:35.688+05:00  INFO 23693 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:15:36.807+05:00  INFO 23693 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:15:36.862+05:00  INFO 23693 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:15:37.458+05:00  INFO 23693 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:15:37.467+05:00  INFO 23693 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:15:37.467+05:00  INFO 23693 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:15:37.524+05:00  INFO 23693 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:15:37.524+05:00  INFO 23693 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1835 ms
-2023-09-22T09:15:37.646+05:00 DEBUG 23693 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:15:37.737+05:00  INFO 23693 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
-2023-09-22T09:15:37.737+05:00  INFO 23693 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:15:37.738+05:00  INFO 23693 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
-2023-09-22T09:15:37.745+05:00  INFO 23693 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:15:37.886+05:00  INFO 23693 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@782f9691
-2023-09-22T09:15:37.888+05:00  INFO 23693 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:15:37.904+05:00  INFO 23693 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
-2023-09-22T09:15:37.940+05:00  INFO 23693 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.014s)
-2023-09-22T09:15:37.964+05:00  INFO 23693 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" with baseline ...
-2023-09-22T09:15:38.005+05:00  INFO 23693 --- [restartedMain] o.f.core.internal.command.DbBaseline     : Successfully baselined schema with version: 0
-2023-09-22T09:15:38.037+05:00  INFO 23693 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
-2023-09-22T09:15:38.115+05:00  INFO 23693 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - insert articles"
-2023-09-22T09:15:38.130+05:00 ERROR 23693 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema "public" to version "1 - insert articles" failed! Changes successfully rolled back.
-2023-09-22T09:15:38.136+05:00  WARN 23693 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
+2023-09-21T17:49:16.157+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article" contains null values]
 
-2023-09-22T09:15:38.136+05:00  INFO 23693 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-22T09:15:38.173+05:00  INFO 23693 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-22T09:15:38.177+05:00  INFO 23693 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-22T09:15:38.198+05:00  INFO 23693 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-09-22T09:15:38.213+05:00 ERROR 23693 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.11.jar:6.0.11]
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
 	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
@@ -260,58 +191,7 @@ Statement  : insert into article (id, content, created_at, created_by, updated_a
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
-Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:384) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$applyMigrations$1(DbMigrate.java:274) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:273) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$migrateAll$0(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:73) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.lambda$execute$0(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLConnection.lock(PostgreSQLConnection.java:96) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:143) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:98) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.lambda$migrate$0(Flyway.java:187) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:196) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:139) ~[flyway-core-9.16.0.jar:na]
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66) ~[spring-boot-autoconfigure-3.1.3.jar:3.1.3]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
-	... 23 common frames omitted
-Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:275) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:222) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:126) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.executeOnce(SqlMigrationExecutor.java:68) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.lambda$execute$0(SqlMigrationExecutor.java:57) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.DefaultExecutionStrategy.execute(DefaultExecutionStrategy.java:27) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:376) ~[flyway-core-9.16.0.jar:na]
-	... 42 common frames omitted
-Caused by: org.postgresql.util.PSQLException: ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_by" of relation "article" contains null values
 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
@@ -323,17 +203,457 @@ Caused by: org.postgresql.util.PSQLException: ERROR: column "updated_at" of rela
 	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
 	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
 	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
-	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:201) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.ParsedSqlStatement.execute(ParsedSqlStatement.java:95) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:210) ~[flyway-core-9.16.0.jar:na]
-	... 48 common frames omitted
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
 
-2023-09-22T09:17:08.679+05:00  INFO 23871 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 23871 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:17:08.682+05:00  INFO 23871 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:17:08.733+05:00  INFO 23871 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:17:08.733+05:00  INFO 23871 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:17:09.781+05:00  INFO 23871 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:17:09.844+05:00 ERROR 23871 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+2023-09-21T17:49:16.163+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article_comment" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article_comment" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
+	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_at" of relation "article_comment" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
+
+2023-09-21T17:49:16.167+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article_comment" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article_comment" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
+	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_by" of relation "article_comment" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
+
+2023-09-21T17:49:16.232+05:00  INFO 15902 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-21T17:49:16.357+05:00  WARN 15902 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-21T17:49:16.603+05:00 DEBUG 15902 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-21T17:49:16.736+05:00 DEBUG 15902 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-21T17:49:16.779+05:00 DEBUG 15902 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-21T17:49:16.803+05:00 DEBUG 15902 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-21T17:49:17.322+05:00  INFO 15902 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-21T17:49:17.332+05:00  INFO 15902 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-21T17:49:17.506+05:00  INFO 15902 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-21T17:49:17.552+05:00  INFO 15902 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 7.408 seconds (process running for 8.584)
+2023-09-21T17:49:36.950+05:00  INFO 15902 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 5 class path changes (2 additions, 0 deletions, 3 modifications)
+2023-09-21T17:49:36.980+05:00  INFO 15902 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-09-21T17:49:37.004+05:00  INFO 15902 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-21T17:49:37.009+05:00  INFO 15902 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-09-21T17:49:37.013+05:00  INFO 15902 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-09-21T17:49:37.227+05:00  INFO 15902 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 15902 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-21T17:49:37.228+05:00  INFO 15902 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-21T17:49:37.845+05:00  INFO 15902 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-21T17:49:37.890+05:00  INFO 15902 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 2 JPA repository interfaces.
+2023-09-21T17:49:38.196+05:00  INFO 15902 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-09-21T17:49:38.198+05:00  INFO 15902 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-21T17:49:38.199+05:00  INFO 15902 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-09-21T17:49:38.222+05:00  INFO 15902 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-21T17:49:38.222+05:00  INFO 15902 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 988 ms
+2023-09-21T17:49:38.284+05:00 DEBUG 15902 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2023-09-21T17:49:38.333+05:00  INFO 15902 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-09-21T17:49:38.382+05:00  INFO 15902 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@6f7b1cfd
+2023-09-21T17:49:38.382+05:00  INFO 15902 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-09-21T17:49:38.385+05:00  INFO 15902 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
+2023-09-21T17:49:38.407+05:00  INFO 15902 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.014s)
+2023-09-21T17:49:38.454+05:00  INFO 15902 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2023-09-21T17:49:38.455+05:00  INFO 15902 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2023-09-21T17:49:38.493+05:00  INFO 15902 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-21T17:49:38.503+05:00  INFO 15902 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-21T17:49:38.504+05:00  INFO 15902 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-21T17:49:38.572+05:00  INFO 15902 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-21T17:49:38.666+05:00  INFO 15902 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-21T17:49:38.704+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
+	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_at" of relation "article" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
+
+2023-09-21T17:49:38.709+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
+	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_by" of relation "article" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
+
+2023-09-21T17:49:38.729+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article_comment" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_at timestamp(6) not null" via JDBC [ERROR: column "modified_at" of relation "article_comment" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
+	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_at" of relation "article_comment" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
+
+2023-09-21T17:49:38.731+05:00  WARN 15902 --- [restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article_comment" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table if exists article_comment 
+       add column modified_by varchar(100) not null" via JDBC [ERROR: column "modified_by" of relation "article_comment" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:92) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:574) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:514) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:333) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:232) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:117) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:284) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:292) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:431) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1455) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
+	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "modified_by" of relation "article_comment" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:78) ~[hibernate-core-6.2.7.Final.jar:6.2.7.Final]
+	... 43 common frames omitted
+
+2023-09-21T17:49:38.799+05:00  INFO 15902 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-21T17:49:38.861+05:00  WARN 15902 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-21T17:49:38.921+05:00 DEBUG 15902 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-21T17:49:38.955+05:00 DEBUG 15902 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-21T17:49:38.980+05:00 DEBUG 15902 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-21T17:49:38.983+05:00 DEBUG 15902 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-21T17:49:39.324+05:00  INFO 15902 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-21T17:49:39.332+05:00  INFO 15902 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-21T17:49:39.355+05:00  INFO 15902 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-21T17:49:39.368+05:00  INFO 15902 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 2.232 seconds (process running for 30.402)
+2023-09-21T17:49:39.371+05:00  INFO 15902 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-09-22T09:26:17.350+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24628 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-22T09:26:17.351+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-22T09:26:17.645+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-22T09:26:17.677+05:00 ERROR 24628 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
 java.lang.NoClassDefFoundError: com/example/projectboard/domain/AuditingFields
 	at java.base/java.lang.ClassLoader.defineClass1(Native Method) ~[na:na]
@@ -401,562 +721,76 @@ Caused by: java.lang.ClassNotFoundException: com.example.projectboard.domain.Aud
 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520) ~[na:na]
 	... 55 common frames omitted
 
-2023-09-22T09:18:01.674+05:00  INFO 23943 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 23943 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:18:01.677+05:00  INFO 23943 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:18:01.742+05:00  INFO 23943 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:18:01.743+05:00  INFO 23943 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:18:02.800+05:00  INFO 23943 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:18:02.849+05:00  INFO 23943 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:18:03.441+05:00  INFO 23943 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:18:03.448+05:00  INFO 23943 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:18:03.449+05:00  INFO 23943 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:18:03.496+05:00  INFO 23943 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:18:03.496+05:00  INFO 23943 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1753 ms
-2023-09-22T09:18:03.606+05:00 DEBUG 23943 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:18:03.697+05:00  INFO 23943 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
-2023-09-22T09:18:03.697+05:00  INFO 23943 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:18:03.697+05:00  INFO 23943 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
-2023-09-22T09:18:03.706+05:00  INFO 23943 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:18:03.853+05:00  INFO 23943 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@75b57ede
-2023-09-22T09:18:03.854+05:00  INFO 23943 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:18:03.870+05:00  INFO 23943 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
-2023-09-22T09:18:03.918+05:00  INFO 23943 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.032s)
-2023-09-22T09:18:03.963+05:00  INFO 23943 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
-2023-09-22T09:18:04.076+05:00  INFO 23943 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - insert articles"
-2023-09-22T09:18:04.094+05:00 ERROR 23943 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema "public" to version "1 - insert articles" failed! Changes successfully rolled back.
-2023-09-22T09:18:04.102+05:00  WARN 23943 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-2023-09-22T09:18:04.103+05:00  INFO 23943 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-22T09:18:04.133+05:00  INFO 23943 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-22T09:18:04.136+05:00  INFO 23943 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-22T09:18:04.158+05:00  INFO 23943 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-09-22T09:18:04.174+05:00 ERROR 23943 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
-	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
-Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:384) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$applyMigrations$1(DbMigrate.java:274) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:273) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$migrateAll$0(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:73) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.lambda$execute$0(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLConnection.lock(PostgreSQLConnection.java:96) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:143) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:98) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.lambda$migrate$0(Flyway.java:187) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:196) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:139) ~[flyway-core-9.16.0.jar:na]
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66) ~[spring-boot-autoconfigure-3.1.3.jar:3.1.3]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
-	... 23 common frames omitted
-Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:275) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:222) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:126) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.executeOnce(SqlMigrationExecutor.java:68) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.lambda$execute$0(SqlMigrationExecutor.java:57) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.DefaultExecutionStrategy.execute(DefaultExecutionStrategy.java:27) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:376) ~[flyway-core-9.16.0.jar:na]
-	... 42 common frames omitted
-Caused by: org.postgresql.util.PSQLException: ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
-	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:201) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.ParsedSqlStatement.execute(ParsedSqlStatement.java:95) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:210) ~[flyway-core-9.16.0.jar:na]
-	... 48 common frames omitted
-
-2023-09-22T09:18:51.526+05:00  INFO 24072 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24072 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:18:51.531+05:00  INFO 24072 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:18:51.592+05:00  INFO 24072 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:18:51.592+05:00  INFO 24072 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:18:52.606+05:00  INFO 24072 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:18:52.656+05:00  INFO 24072 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:18:53.249+05:00  INFO 24072 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:18:53.257+05:00  INFO 24072 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:18:53.258+05:00  INFO 24072 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:18:53.316+05:00  INFO 24072 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:18:53.316+05:00  INFO 24072 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1723 ms
-2023-09-22T09:18:53.440+05:00 DEBUG 24072 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:18:53.547+05:00  INFO 24072 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
-2023-09-22T09:18:53.547+05:00  INFO 24072 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:18:53.547+05:00  INFO 24072 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
-2023-09-22T09:18:53.555+05:00  INFO 24072 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:18:53.709+05:00  INFO 24072 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@595f31f9
-2023-09-22T09:18:53.711+05:00  INFO 24072 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:18:53.742+05:00  INFO 24072 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
-2023-09-22T09:18:53.787+05:00  INFO 24072 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.026s)
-2023-09-22T09:18:53.831+05:00  INFO 24072 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
-2023-09-22T09:18:53.933+05:00  INFO 24072 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - insert articles"
-2023-09-22T09:18:53.950+05:00 ERROR 24072 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema "public" to version "1 - insert articles" failed! Changes successfully rolled back.
-2023-09-22T09:18:53.956+05:00  WARN 24072 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-2023-09-22T09:18:53.958+05:00  INFO 24072 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-22T09:18:53.994+05:00  INFO 24072 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-22T09:18:53.998+05:00  INFO 24072 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-22T09:18:54.020+05:00  INFO 24072 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-09-22T09:18:54.036+05:00 ERROR 24072 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
-	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
-Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:384) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$applyMigrations$1(DbMigrate.java:274) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:273) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$migrateAll$0(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:73) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.lambda$execute$0(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLConnection.lock(PostgreSQLConnection.java:96) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:143) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:98) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.lambda$migrate$0(Flyway.java:187) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:196) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:139) ~[flyway-core-9.16.0.jar:na]
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66) ~[spring-boot-autoconfigure-3.1.3.jar:3.1.3]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
-	... 23 common frames omitted
-Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42703
-Error Code : 0
-Message    : ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:275) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:222) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:126) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.executeOnce(SqlMigrationExecutor.java:68) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.lambda$execute$0(SqlMigrationExecutor.java:57) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.DefaultExecutionStrategy.execute(DefaultExecutionStrategy.java:27) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:376) ~[flyway-core-9.16.0.jar:na]
-	... 42 common frames omitted
-Caused by: org.postgresql.util.PSQLException: ERROR: column "updated_at" of relation "article" does not exist
-  Position: 59
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
-	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:201) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.ParsedSqlStatement.execute(ParsedSqlStatement.java:95) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:210) ~[flyway-core-9.16.0.jar:na]
-	... 48 common frames omitted
-
-2023-09-22T09:19:25.586+05:00  INFO 24155 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24155 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:19:25.589+05:00  INFO 24155 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:19:25.633+05:00  INFO 24155 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:19:25.633+05:00  INFO 24155 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:19:26.673+05:00  INFO 24155 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:19:26.726+05:00  INFO 24155 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:19:27.441+05:00  INFO 24155 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:19:27.451+05:00  INFO 24155 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:19:27.451+05:00  INFO 24155 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:19:27.504+05:00  INFO 24155 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:19:27.505+05:00  INFO 24155 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1871 ms
-2023-09-22T09:19:27.635+05:00 DEBUG 24155 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:19:27.729+05:00  INFO 24155 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
-2023-09-22T09:19:27.730+05:00  INFO 24155 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:19:27.730+05:00  INFO 24155 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
-2023-09-22T09:19:27.738+05:00  INFO 24155 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:19:27.872+05:00  INFO 24155 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5de63903
-2023-09-22T09:19:27.873+05:00  INFO 24155 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:19:27.889+05:00  INFO 24155 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
-2023-09-22T09:19:27.925+05:00  INFO 24155 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.022s)
-2023-09-22T09:19:27.981+05:00  INFO 24155 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
-2023-09-22T09:19:28.089+05:00  INFO 24155 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - insert articles"
-2023-09-22T09:19:28.107+05:00 ERROR 24155 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema "public" to version "1 - insert articles" failed! Changes successfully rolled back.
-2023-09-22T09:19:28.116+05:00  WARN 24155 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42P01
-Error Code : 0
-Message    : ERROR: relation "article" does not exist
-  Position: 13
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-2023-09-22T09:19:28.117+05:00  INFO 24155 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-22T09:19:28.128+05:00  INFO 24155 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-22T09:19:28.131+05:00  INFO 24155 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2023-09-22T09:19:28.152+05:00  INFO 24155 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-09-22T09:19:28.167+05:00 ERROR 24155 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
-
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42P01
-Error Code : 0
-Message    : ERROR: relation "article" does not exist
-  Position: 13
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1155) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.11.jar:6.0.11]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.3.jar:3.1.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.3.jar:3.1.3]
-	at com.example.projectboard.ProjectBoardApplication.main(ProjectBoardApplication.java:10) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.3.jar:3.1.3]
-Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42P01
-Error Code : 0
-Message    : ERROR: relation "article" does not exist
-  Position: 13
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:384) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$applyMigrations$1(DbMigrate.java:274) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:273) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.lambda$migrateAll$0(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:73) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.lambda$execute$0(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.jdbc.TransactionalExecutionTemplate.execute(TransactionalExecutionTemplate.java:55) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLAdvisoryLockTemplate.execute(PostgreSQLAdvisoryLockTemplate.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.postgresql.PostgreSQLConnection.lock(PostgreSQLConnection.java:96) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:143) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:141) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:98) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.lambda$migrate$0(Flyway.java:187) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:196) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:139) ~[flyway-core-9.16.0.jar:na]
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66) ~[spring-boot-autoconfigure-3.1.3.jar:3.1.3]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-6.0.11.jar:6.0.11]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.11.jar:6.0.11]
-	... 23 common frames omitted
-Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: Migration V1__insert_articles.sql failed
-----------------------------------------
-SQL State  : 42P01
-Error Code : 0
-Message    : ERROR: relation "article" does not exist
-  Position: 13
-Location   : db/migration/V1__insert_articles.sql (/Users/user/SpringProjects/backenddev/project-board/build/resources/main/db/migration/V1__insert_articles.sql)
-Line       : 1
-Statement  : insert into article (id, content, created_at, created_by, updated_at, updated_by, title, hashtag) values (1, 'Prodder', '9/3/2023', 'Tabbitha', '1/20/2023', 'Angelo', 'Brandyn', 'Briana')
-
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:275) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:222) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:126) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.executeOnce(SqlMigrationExecutor.java:68) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.lambda$execute$0(SqlMigrationExecutor.java:57) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.database.DefaultExecutionStrategy.execute(DefaultExecutionStrategy.java:27) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:56) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:376) ~[flyway-core-9.16.0.jar:na]
-	... 42 common frames omitted
-Caused by: org.postgresql.util.PSQLException: ERROR: relation "article" does not exist
-  Position: 13
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2676) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2366) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:496) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:413) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:333) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:319) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:295) ~[postgresql-42.5.4.jar:42.5.4]
-	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:290) ~[postgresql-42.5.4.jar:42.5.4]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-5.0.1.jar:na]
-	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:201) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.ParsedSqlStatement.execute(ParsedSqlStatement.java:95) ~[flyway-core-9.16.0.jar:na]
-	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:210) ~[flyway-core-9.16.0.jar:na]
-	... 48 common frames omitted
-
-2023-09-22T09:19:57.683+05:00  INFO 24223 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24223 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:19:57.689+05:00  INFO 24223 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:19:57.767+05:00  INFO 24223 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:19:57.768+05:00  INFO 24223 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:19:58.922+05:00  INFO 24223 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:19:58.973+05:00  INFO 24223 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:19:59.658+05:00  INFO 24223 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:19:59.667+05:00  INFO 24223 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:19:59.667+05:00  INFO 24223 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:19:59.720+05:00  INFO 24223 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:19:59.721+05:00  INFO 24223 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1951 ms
-2023-09-22T09:19:59.841+05:00 DEBUG 24223 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:19:59.992+05:00  INFO 24223 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-22T09:20:00.036+05:00  INFO 24223 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
-2023-09-22T09:20:00.039+05:00  INFO 24223 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-22T09:20:00.121+05:00  INFO 24223 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-22T09:20:00.232+05:00  INFO 24223 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-22T09:20:00.267+05:00  INFO 24223 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:20:00.414+05:00  INFO 24223 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@27f19a84
-2023-09-22T09:20:00.416+05:00  INFO 24223 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:20:00.628+05:00  INFO 24223 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-22T09:20:01.089+05:00  INFO 24223 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-22T09:20:01.113+05:00  WARN 24223 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2023-09-22T09:20:01.113+05:00  WARN 24223 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "article_comment" does not exist, skipping
-2023-09-22T09:20:01.114+05:00  WARN 24223 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2023-09-22T09:20:01.114+05:00  WARN 24223 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "article" does not exist, skipping
-2023-09-22T09:20:01.115+05:00  WARN 24223 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
-2023-09-22T09:20:01.115+05:00  WARN 24223 --- [restartedMain] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "article_comment" does not exist, skipping
-2023-09-22T09:20:01.176+05:00  INFO 24223 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-22T09:20:01.261+05:00  WARN 24223 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-22T09:20:01.368+05:00 DEBUG 24223 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2023-09-22T09:20:01.434+05:00 DEBUG 24223 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
-2023-09-22T09:20:01.451+05:00 DEBUG 24223 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2023-09-22T09:20:01.458+05:00 DEBUG 24223 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2023-09-22T09:20:01.936+05:00  INFO 24223 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-22T09:20:01.942+05:00  INFO 24223 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-09-22T09:20:02.008+05:00  INFO 24223 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2023-09-22T09:20:02.038+05:00  INFO 24223 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 4.945 seconds (process running for 5.729)
-2023-09-22T09:20:24.533+05:00  INFO 24223 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-22T09:20:24.540+05:00  INFO 24223 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-22T09:20:24.543+05:00  INFO 24223 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-22T09:20:27.348+05:00  INFO 24302 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24302 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:20:27.350+05:00  INFO 24302 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:20:27.402+05:00  INFO 24302 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:20:27.402+05:00  INFO 24302 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:20:28.399+05:00  INFO 24302 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:20:28.458+05:00  INFO 24302 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:20:29.116+05:00  INFO 24302 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:20:29.125+05:00  INFO 24302 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:20:29.126+05:00  INFO 24302 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:20:29.191+05:00  INFO 24302 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:20:29.191+05:00  INFO 24302 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1788 ms
-2023-09-22T09:20:29.311+05:00 DEBUG 24302 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:20:29.401+05:00  INFO 24302 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
-2023-09-22T09:20:29.402+05:00  INFO 24302 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:20:29.402+05:00  INFO 24302 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
-2023-09-22T09:20:29.411+05:00  INFO 24302 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:20:29.560+05:00  INFO 24302 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@51874a4c
-2023-09-22T09:20:29.561+05:00  INFO 24302 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:20:29.577+05:00  INFO 24302 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
-2023-09-22T09:20:29.617+05:00  INFO 24302 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.025s)
-2023-09-22T09:20:29.639+05:00  INFO 24302 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" with baseline ...
-2023-09-22T09:20:29.670+05:00  INFO 24302 --- [restartedMain] o.f.core.internal.command.DbBaseline     : Successfully baselined schema with version: 0
-2023-09-22T09:20:29.703+05:00  INFO 24302 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
-2023-09-22T09:20:29.834+05:00  INFO 24302 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - insert articles"
-2023-09-22T09:20:30.086+05:00  INFO 24302 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "2 - insert article comments"
-2023-09-22T09:20:30.141+05:00  INFO 24302 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "public", now at version v2 (execution time 00:00.444s)
-2023-09-22T09:20:30.254+05:00  INFO 24302 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-22T09:20:30.332+05:00  INFO 24302 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
-2023-09-22T09:20:30.337+05:00  INFO 24302 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-22T09:20:30.426+05:00  INFO 24302 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-22T09:20:30.518+05:00  INFO 24302 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-22T09:20:30.715+05:00  INFO 24302 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-22T09:20:31.145+05:00  INFO 24302 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-22T09:20:31.227+05:00  INFO 24302 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-22T09:20:31.315+05:00  WARN 24302 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-22T09:20:31.421+05:00 DEBUG 24302 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2023-09-22T09:20:31.483+05:00 DEBUG 24302 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
-2023-09-22T09:20:31.498+05:00 DEBUG 24302 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2023-09-22T09:20:31.509+05:00 DEBUG 24302 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2023-09-22T09:20:31.912+05:00  INFO 24302 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-22T09:20:31.974+05:00  INFO 24302 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-09-22T09:20:32.062+05:00  INFO 24302 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2023-09-22T09:20:32.085+05:00  INFO 24302 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 5.236 seconds (process running for 5.902)
-2023-09-22T09:22:12.389+05:00  INFO 24302 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-09-22T09:22:12.403+05:00  INFO 24302 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-09-22T09:22:12.406+05:00  INFO 24302 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-09-22T09:22:52.263+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24628 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
-2023-09-22T09:22:52.267+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
-2023-09-22T09:22:52.329+05:00  INFO 24628 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-09-22T09:22:52.330+05:00  INFO 24628 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-09-22T09:22:53.291+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-22T09:22:53.347+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 2 JPA repository interfaces.
-2023-09-22T09:22:53.917+05:00  INFO 24628 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-09-22T09:22:53.924+05:00  INFO 24628 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-09-22T09:22:53.925+05:00  INFO 24628 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
-2023-09-22T09:22:53.972+05:00  INFO 24628 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-09-22T09:22:53.973+05:00  INFO 24628 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1643 ms
-2023-09-22T09:22:54.081+05:00 DEBUG 24628 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
-2023-09-22T09:22:54.173+05:00  INFO 24628 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
-2023-09-22T09:22:54.173+05:00  INFO 24628 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
-2023-09-22T09:22:54.173+05:00  INFO 24628 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
-2023-09-22T09:22:54.183+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-22T09:22:54.330+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@51874a4c
-2023-09-22T09:22:54.333+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-22T09:22:54.349+05:00  INFO 24628 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
-2023-09-22T09:22:54.397+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.016s)
-2023-09-22T09:22:54.417+05:00  INFO 24628 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" with baseline ...
-2023-09-22T09:22:54.474+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbBaseline     : Successfully baselined schema with version: 0
-2023-09-22T09:22:54.493+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 0
-2023-09-22T09:22:54.601+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - insert articles"
-2023-09-22T09:22:54.883+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "2 - insert article comments"
-2023-09-22T09:22:54.951+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "public", now at version v2 (execution time 00:00.462s)
-2023-09-22T09:22:55.071+05:00  INFO 24628 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-22T09:22:55.157+05:00  INFO 24628 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
-2023-09-22T09:22:55.162+05:00  INFO 24628 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-22T09:22:55.264+05:00  INFO 24628 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-22T09:22:55.367+05:00  INFO 24628 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-22T09:22:55.573+05:00  INFO 24628 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-22T09:22:56.023+05:00  INFO 24628 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-22T09:22:56.131+05:00  INFO 24628 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-22T09:22:56.233+05:00  WARN 24628 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-22T09:22:56.353+05:00 DEBUG 24628 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2023-09-22T09:22:56.415+05:00 DEBUG 24628 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
-2023-09-22T09:22:56.434+05:00 DEBUG 24628 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2023-09-22T09:22:56.447+05:00 DEBUG 24628 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2023-09-22T09:22:56.952+05:00  INFO 24628 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-09-22T09:22:56.961+05:00  INFO 24628 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-09-22T09:22:57.035+05:00  INFO 24628 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2023-09-22T09:22:57.064+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 5.305 seconds (process running for 6.038)
+2023-09-22T09:26:20.236+05:00  INFO 24628 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-09-22T09:26:20.238+05:00  INFO 24628 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-09-22T09:26:20.246+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24628 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-22T09:26:20.247+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-22T09:26:20.534+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-22T09:26:20.556+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 2 JPA repository interfaces.
+2023-09-22T09:26:20.696+05:00  INFO 24628 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-09-22T09:26:20.699+05:00  INFO 24628 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-22T09:26:20.700+05:00  INFO 24628 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-09-22T09:26:20.712+05:00  INFO 24628 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-22T09:26:20.713+05:00  INFO 24628 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 463 ms
+2023-09-22T09:26:20.748+05:00 DEBUG 24628 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2023-09-22T09:26:20.773+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-09-22T09:26:20.815+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@49f92a86
+2023-09-22T09:26:20.815+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-09-22T09:26:20.817+05:00  INFO 24628 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
+2023-09-22T09:26:20.833+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.010s)
+2023-09-22T09:26:20.863+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2023-09-22T09:26:20.863+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2023-09-22T09:26:20.878+05:00  INFO 24628 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-22T09:26:20.887+05:00  INFO 24628 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-22T09:26:20.890+05:00  INFO 24628 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-22T09:26:20.930+05:00  INFO 24628 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-22T09:26:20.997+05:00  INFO 24628 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-22T09:26:21.054+05:00  INFO 24628 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-22T09:26:21.087+05:00  WARN 24628 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-22T09:26:21.118+05:00 DEBUG 24628 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-22T09:26:21.132+05:00 DEBUG 24628 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-22T09:26:21.139+05:00 DEBUG 24628 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-22T09:26:21.143+05:00 DEBUG 24628 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-22T09:26:21.278+05:00  INFO 24628 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-22T09:26:21.281+05:00  INFO 24628 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-22T09:26:21.307+05:00  INFO 24628 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-22T09:26:21.317+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 1.182 seconds (process running for 210.294)
+2023-09-22T09:26:21.322+05:00  INFO 24628 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-09-22T09:26:22.696+05:00  INFO 24628 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (2 additions, 0 deletions, 0 modifications)
+2023-09-22T09:26:22.712+05:00  INFO 24628 --- [Thread-14] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-09-22T09:26:22.745+05:00  INFO 24628 --- [Thread-14] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-22T09:26:22.753+05:00  INFO 24628 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-09-22T09:26:22.760+05:00  INFO 24628 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-09-22T09:26:23.075+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 24628 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-22T09:26:23.077+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-22T09:26:23.357+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-22T09:26:23.397+05:00  INFO 24628 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 2 JPA repository interfaces.
+2023-09-22T09:26:23.605+05:00  INFO 24628 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-09-22T09:26:23.610+05:00  INFO 24628 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-22T09:26:23.611+05:00  INFO 24628 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-09-22T09:26:23.626+05:00  INFO 24628 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-22T09:26:23.627+05:00  INFO 24628 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 544 ms
+2023-09-22T09:26:23.675+05:00 DEBUG 24628 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2023-09-22T09:26:23.711+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-09-22T09:26:23.795+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@2dbd4531
+2023-09-22T09:26:23.795+05:00  INFO 24628 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-09-22T09:26:23.812+05:00  INFO 24628 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
+2023-09-22T09:26:23.845+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.022s)
+2023-09-22T09:26:23.899+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2023-09-22T09:26:23.902+05:00  INFO 24628 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2023-09-22T09:26:23.949+05:00  INFO 24628 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-22T09:26:23.955+05:00  INFO 24628 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-22T09:26:23.955+05:00  INFO 24628 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-22T09:26:24.042+05:00  INFO 24628 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-22T09:26:24.167+05:00  INFO 24628 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-22T09:26:24.282+05:00  INFO 24628 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-22T09:26:24.333+05:00  WARN 24628 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-22T09:26:24.378+05:00 DEBUG 24628 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-22T09:26:24.395+05:00 DEBUG 24628 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-22T09:26:24.408+05:00 DEBUG 24628 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-22T09:26:24.413+05:00 DEBUG 24628 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-22T09:26:24.630+05:00  INFO 24628 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-22T09:26:24.634+05:00  INFO 24628 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-22T09:26:24.667+05:00  INFO 24628 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-22T09:26:24.675+05:00  INFO 24628 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 1.698 seconds (process running for 213.652)
+2023-09-22T09:26:24.678+05:00  INFO 24628 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
