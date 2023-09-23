@@ -27,6 +27,11 @@ public class ArticleComment extends AuditingFields{
     @Column(nullable = false, length = 500)
     private String content;
 
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserAccount userAccount;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
