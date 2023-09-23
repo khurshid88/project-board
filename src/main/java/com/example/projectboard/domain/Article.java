@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @ToString
@@ -15,7 +18,7 @@ import java.util.Objects;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class Article extends AuditingFields{
+public class Article extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +32,23 @@ public class Article extends AuditingFields{
     @Setter
     private String hashtag;
 
-    protected Article(){}
+    //the owning side - @JoinTable
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST
+            }
+    )
+    @JoinTable(
+            name = "acticle_hashtag",
+            joinColumns = {@JoinColumn(name = "article_id")},
+            inverseJoinColumns = {@JoinColumn(name = "hashtag_id")}
+    )
+    private Set<Hashtag> hashtags = new LinkedHashSet<>();
+
+    protected Article() {
+    }
 
     private Article(String title, String content, String hashtag) {
         this.title = title;
@@ -37,7 +56,7 @@ public class Article extends AuditingFields{
         this.hashtag = hashtag;
     }
 
-    public static Article of(String title, String content, String hashtag){
+    public static Article of(String title, String content, String hashtag) {
         return new Article(title, content, hashtag);
     }
 
