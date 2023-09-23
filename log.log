@@ -1555,3 +1555,38 @@ Caused by: java.lang.ClassNotFoundException: com.example.projectboard.domain.Art
 	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114) ~[na:na]
 	... 41 common frames omitted
 
+2023-09-23T18:37:59.927+05:00  INFO 67880 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-09-23T18:37:59.928+05:00  INFO 67880 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-09-23T18:37:59.935+05:00  INFO 67880 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 67880 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-23T18:37:59.936+05:00  INFO 67880 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-23T18:38:00.271+05:00  INFO 67880 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-23T18:38:00.285+05:00  INFO 67880 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 2 JPA repository interfaces.
+2023-09-23T18:38:00.535+05:00  INFO 67880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-09-23T18:38:00.539+05:00  INFO 67880 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-23T18:38:00.540+05:00  INFO 67880 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-09-23T18:38:00.566+05:00  INFO 67880 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-23T18:38:00.566+05:00  INFO 67880 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 627 ms
+2023-09-23T18:38:00.621+05:00 DEBUG 67880 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2023-09-23T18:38:00.689+05:00  INFO 67880 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-09-23T18:38:00.765+05:00  INFO 67880 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@51632668
+2023-09-23T18:38:00.768+05:00  INFO 67880 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-09-23T18:38:00.771+05:00  INFO 67880 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
+2023-09-23T18:38:00.836+05:00  INFO 67880 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.030s)
+2023-09-23T18:38:00.936+05:00  INFO 67880 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2023-09-23T18:38:00.939+05:00  INFO 67880 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2023-09-23T18:38:00.983+05:00  INFO 67880 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-23T18:38:00.994+05:00  INFO 67880 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-23T18:38:00.994+05:00  INFO 67880 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-23T18:38:01.062+05:00  INFO 67880 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-23T18:38:01.251+05:00  INFO 67880 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-23T18:38:01.539+05:00  INFO 67880 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-23T18:38:01.593+05:00  WARN 67880 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-23T18:38:01.658+05:00 DEBUG 67880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-23T18:38:01.691+05:00 DEBUG 67880 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-23T18:38:01.703+05:00 DEBUG 67880 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-23T18:38:01.706+05:00 DEBUG 67880 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-23T18:38:01.939+05:00  INFO 67880 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-23T18:38:01.947+05:00  INFO 67880 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-23T18:38:02.025+05:00  INFO 67880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-23T18:38:02.038+05:00  INFO 67880 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 2.173 seconds (process running for 351.029)
+2023-09-23T18:38:02.043+05:00  INFO 67880 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
