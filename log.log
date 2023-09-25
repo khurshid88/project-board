@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2023-09-23T18:02:28.357+05:00  INFO 65143 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 65143 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
 2023-09-23T18:02:28.372+05:00  INFO 65143 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
 2023-09-23T18:02:28.485+05:00  INFO 65143 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -1590,3 +1591,85 @@ Caused by: java.lang.ClassNotFoundException: com.example.projectboard.domain.Art
 2023-09-23T18:38:02.025+05:00  INFO 67880 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
 2023-09-23T18:38:02.038+05:00  INFO 67880 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 2.173 seconds (process running for 351.029)
 2023-09-23T18:38:02.043+05:00  INFO 67880 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+=======
+2023-09-25T10:15:53.413+05:00  INFO 77242 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 77242 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-25T10:15:53.433+05:00  INFO 77242 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-25T10:15:53.517+05:00  INFO 77242 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-09-25T10:15:53.518+05:00  INFO 77242 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-09-25T10:15:54.822+05:00  INFO 77242 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-25T10:15:54.898+05:00  INFO 77242 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 2 JPA repository interfaces.
+2023-09-25T10:15:55.797+05:00  INFO 77242 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-09-25T10:15:55.806+05:00  INFO 77242 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-25T10:15:55.807+05:00  INFO 77242 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-09-25T10:15:55.873+05:00  INFO 77242 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-25T10:15:55.874+05:00  INFO 77242 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2355 ms
+2023-09-25T10:15:56.013+05:00 DEBUG 77242 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2023-09-25T10:15:56.114+05:00  INFO 77242 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 9.16.0 by Redgate
+2023-09-25T10:15:56.114+05:00  INFO 77242 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : See release notes here: https://rd.gt/416ObMi
+2023-09-25T10:15:56.114+05:00  INFO 77242 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : 
+2023-09-25T10:15:56.124+05:00  INFO 77242 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-09-25T10:15:56.281+05:00  INFO 77242 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6787d8b2
+2023-09-25T10:15:56.283+05:00  INFO 77242 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-09-25T10:15:56.355+05:00  INFO 77242 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
+2023-09-25T10:15:56.423+05:00  INFO 77242 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.044s)
+2023-09-25T10:15:56.437+05:00  INFO 77242 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2023-09-25T10:15:56.437+05:00  INFO 77242 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2023-09-25T10:15:56.544+05:00  INFO 77242 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-25T10:15:56.632+05:00  INFO 77242 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
+2023-09-25T10:15:56.637+05:00  INFO 77242 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-09-25T10:15:56.734+05:00  INFO 77242 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-25T10:15:56.823+05:00  INFO 77242 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-25T10:15:57.053+05:00  INFO 77242 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-25T10:15:57.557+05:00  INFO 77242 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-25T10:15:57.740+05:00  INFO 77242 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-25T10:15:57.826+05:00  WARN 77242 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-25T10:15:57.925+05:00 DEBUG 77242 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-25T10:15:57.983+05:00 DEBUG 77242 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-25T10:15:57.998+05:00 DEBUG 77242 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-25T10:15:58.006+05:00 DEBUG 77242 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-25T10:15:58.564+05:00  INFO 77242 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-25T10:15:58.574+05:00  INFO 77242 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-25T10:15:58.648+05:00  INFO 77242 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-25T10:15:58.681+05:00  INFO 77242 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 5.932 seconds (process running for 6.805)
+2023-09-25T10:18:46.623+05:00  INFO 77242 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (6 additions, 0 deletions, 0 modifications)
+2023-09-25T10:18:46.654+05:00  INFO 77242 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-09-25T10:18:46.672+05:00  INFO 77242 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-25T10:18:46.676+05:00  INFO 77242 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-09-25T10:18:46.679+05:00  INFO 77242 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-09-25T10:18:46.838+05:00  INFO 77242 --- [restartedMain] c.e.p.ProjectBoardApplication            : Starting ProjectBoardApplication using Java 17.0.6 with PID 77242 (/Users/user/SpringProjects/backenddev/project-board/build/classes/java/main started by user in /Users/user/SpringProjects/backenddev/project-board)
+2023-09-25T10:18:46.839+05:00  INFO 77242 --- [restartedMain] c.e.p.ProjectBoardApplication            : The following 1 profile is active: "dev"
+2023-09-25T10:18:47.154+05:00  INFO 77242 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-25T10:18:47.171+05:00  INFO 77242 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 4 JPA repository interfaces.
+2023-09-25T10:18:47.323+05:00  INFO 77242 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-09-25T10:18:47.325+05:00  INFO 77242 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-25T10:18:47.326+05:00  INFO 77242 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-09-25T10:18:47.343+05:00  INFO 77242 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-25T10:18:47.343+05:00  INFO 77242 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 498 ms
+2023-09-25T10:18:47.386+05:00 DEBUG 77242 --- [restartedMain] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2023-09-25T10:18:47.428+05:00  INFO 77242 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-09-25T10:18:47.469+05:00  INFO 77242 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@75d0ac47
+2023-09-25T10:18:47.470+05:00  INFO 77242 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-09-25T10:18:47.473+05:00  INFO 77242 --- [restartedMain] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:5432/board (PostgreSQL 13.5)
+2023-09-25T10:18:47.492+05:00  INFO 77242 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 3 migrations (execution time 00:00.010s)
+2023-09-25T10:18:47.535+05:00  INFO 77242 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 2
+2023-09-25T10:18:47.535+05:00  INFO 77242 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2023-09-25T10:18:47.557+05:00  INFO 77242 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-25T10:18:47.563+05:00  INFO 77242 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-25T10:18:47.564+05:00  INFO 77242 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-25T10:18:47.618+05:00  INFO 77242 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-25T10:18:47.709+05:00  INFO 77242 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-25T10:18:47.806+05:00  INFO 77242 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-25T10:18:47.841+05:00  WARN 77242 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-25T10:18:47.889+05:00 DEBUG 77242 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2023-09-25T10:18:47.907+05:00 DEBUG 77242 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 3 mappings in 'requestMappingHandlerMapping'
+2023-09-25T10:18:47.914+05:00 DEBUG 77242 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2023-09-25T10:18:47.917+05:00 DEBUG 77242 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2023-09-25T10:18:48.092+05:00  INFO 77242 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-09-25T10:18:48.097+05:00  INFO 77242 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-09-25T10:18:48.119+05:00  INFO 77242 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-09-25T10:18:48.128+05:00  INFO 77242 --- [restartedMain] c.e.p.ProjectBoardApplication            : Started ProjectBoardApplication in 1.357 seconds (process running for 176.253)
+2023-09-25T10:18:48.133+05:00  INFO 77242 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-09-25T10:22:54.559+05:00  INFO 77242 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-09-25T10:22:54.563+05:00  INFO 77242 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-09-25T10:22:54.566+05:00  INFO 77242 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+>>>>>>> dev

@@ -36,7 +36,7 @@ public class Hashtag extends AuditingFields {
             },
             mappedBy = "hashtags"
     )
-    private Set<Article> articles = new LinkedHashSet<>();
+    private Set<Post> posts = new LinkedHashSet<>();
 
     protected Hashtag() {
     }
