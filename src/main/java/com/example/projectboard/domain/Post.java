@@ -18,7 +18,7 @@ import java.util.Set;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class Article extends AuditingFields {
+public class Post extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,24 +47,24 @@ public class Article extends AuditingFields {
     )
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
-    protected Article() {
+    protected Post() {
     }
 
-    private Article(String title, String content, String hashtag) {
+    private Post(String title, String content, String hashtag) {
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
     }
 
-    public static Article of(String title, String content, String hashtag) {
-        return new Article(title, content, hashtag);
+    public static Post of(String title, String content, String hashtag) {
+        return new Post(title, content, hashtag);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Article article)) return false;
-        return id != null & id.equals(article.id);
+        if (!(o instanceof Post post)) return false;
+        return id != null & id.equals(post.id);
     }
 
     @Override

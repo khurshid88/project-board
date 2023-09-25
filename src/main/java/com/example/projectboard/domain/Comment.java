@@ -14,14 +14,14 @@ import java.util.Objects;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class ArticleComment extends AuditingFields{
+public class Comment extends AuditingFields{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Setter
     @ManyToOne(optional = false)
-    private Article article;
+    private Post post;
 
     @Setter
     @Column(nullable = false, length = 500)
@@ -35,8 +35,8 @@ public class ArticleComment extends AuditingFields{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ArticleComment articleComment)) return false;
-        return id != null & id.equals(articleComment.id);
+        if (!(o instanceof Comment comment)) return false;
+        return id != null & id.equals(comment.id);
     }
 
     @Override

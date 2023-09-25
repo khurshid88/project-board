@@ -18,10 +18,10 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
 
-logging:
-  level:
-    org:
-      springframework:
-        web: DEBUG
-  file:
-    name: log.log
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: DEBUG
+#  file:
+#    name: log.log
