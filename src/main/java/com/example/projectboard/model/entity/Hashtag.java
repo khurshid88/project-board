@@ -1,4 +1,4 @@
-package com.example.projectboard.domain;
+package com.example.projectboard.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

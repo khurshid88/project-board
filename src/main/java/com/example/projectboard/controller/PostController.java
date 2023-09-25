@@ -1,8 +1,8 @@
 package com.example.projectboard.controller;
 
-import com.example.projectboard.domain.Post;
-import com.example.projectboard.dto.PostDto;
-import com.example.projectboard.exception.PostNotFoundException;
+import com.example.projectboard.model.entity.Post;
+import com.example.projectboard.model.dto.PostDto;
+import com.example.projectboard.model.projection.PostProjection;
 import com.example.projectboard.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -69,6 +68,24 @@ public class PostController {
     public ResponseEntity<?> findByPaging(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
         Pageable paging = PageRequest.of(page, size);
         Page<Post> posts = postService.paging(paging);
+        if(posts.isEmpty())
+            return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @GetMapping("/posts/search")
+    public ResponseEntity<?> searchByKeyword(@RequestParam String keyword){
+
+        List<Post> posts = postService.searchByKeyword(keyword);
+        if(posts.isEmpty())
+            return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @GetMapping("/posts/load")
+    public ResponseEntity<?> loadPosts(){
+
+        List<PostProjection> posts = postService.loadPosts();
         if(posts.isEmpty())
             return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(posts, HttpStatus.OK);

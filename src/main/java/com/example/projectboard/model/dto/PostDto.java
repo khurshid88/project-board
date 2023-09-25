@@ -1,7 +1,6 @@
-package com.example.projectboard.dto;
+package com.example.projectboard.model.dto;
 
-import com.example.projectboard.domain.Hashtag;
-import com.example.projectboard.domain.Post;
+import com.example.projectboard.model.entity.Hashtag;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +13,8 @@ public class PostDto {
     private String title;
     private String content;
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
+
+    protected PostDto(){}
 
     private PostDto(String title, String content) {
         this.title = title;

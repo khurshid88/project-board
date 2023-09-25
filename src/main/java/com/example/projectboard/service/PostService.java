@@ -1,17 +1,14 @@
 package com.example.projectboard.service;
 
-import com.example.projectboard.domain.Post;
-import com.example.projectboard.dto.PostDto;
+import com.example.projectboard.model.entity.Post;
+import com.example.projectboard.model.dto.PostDto;
 import com.example.projectboard.exception.PostNotFoundException;
+import com.example.projectboard.model.projection.PostProjection;
 import com.example.projectboard.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -65,5 +62,15 @@ public class PostService {
 
     public Page<Post> paging(Pageable paging) {
         return postRepository.findAll(paging);
+    }
+
+    public List<Post> searchByKeyword(String keyword) {
+        List<Post> posts = postRepository.searchByKeyword(keyword);
+        return posts;
+    }
+
+    public List<PostProjection> loadPosts() {
+        List<PostProjection> titles = postRepository.loadPosts();
+        return titles;
     }
 }
