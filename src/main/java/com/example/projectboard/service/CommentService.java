@@ -1,4 +1,4 @@
 package com.example.projectboard.service;
 
-public class ArticleCommentService {
+public class CommentService {
 }
