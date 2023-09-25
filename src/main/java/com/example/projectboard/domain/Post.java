@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,7 +14,6 @@ import java.util.Set;
 @ToString
 @Table(indexes = {
         @Index(columnList = "title"),
-        @Index(columnList = "hashtag"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
@@ -29,8 +29,6 @@ public class Post extends AuditingFields {
     @Setter
     @Column(nullable = false, length = 1000)
     private String content;
-    @Setter
-    private String hashtag;
 
     //the owning side - @JoinTable
     @ManyToMany(
@@ -41,8 +39,8 @@ public class Post extends AuditingFields {
             }
     )
     @JoinTable(
-            name = "acticle_hashtag",
-            joinColumns = {@JoinColumn(name = "article_id")},
+            name = "post_hashtag",
+            joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "hashtag_id")}
     )
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
@@ -50,14 +48,25 @@ public class Post extends AuditingFields {
     protected Post() {
     }
 
-    private Post(String title, String content, String hashtag) {
+    private Post(String title, String content) {
         this.title = title;
         this.content = content;
-        this.hashtag = hashtag;
     }
 
-    public static Post of(String title, String content, String hashtag) {
-        return new Post(title, content, hashtag);
+    public static Post of(String title, String content) {
+        return new Post(title, content);
+    }
+
+    public void addHashtag(Hashtag hashtag) {
+        this.getHashtags().add(hashtag);
+    }
+
+    public void addHashtags(Collection<Hashtag> hashtags) {
+        this.getHashtags().addAll(hashtags);
+    }
+
+    public void clearHashtags() {
+        this.getHashtags().clear();
     }
 
     @Override
