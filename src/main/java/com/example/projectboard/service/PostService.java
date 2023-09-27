@@ -2,7 +2,7 @@ package com.example.projectboard.service;
 
 import com.example.projectboard.model.entity.Post;
 import com.example.projectboard.model.dto.PostDto;
-import com.example.projectboard.exception.PostNotFoundException;
+import com.example.projectboard.exception.ResourceNotFoundException;
 import com.example.projectboard.model.projection.PostProjection;
 import com.example.projectboard.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +20,12 @@ public class PostService {
 
     public Post findById(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
-        if(optionalPost.isPresent()){
-            return optionalPost.get();
-        }
-        return null;
+        return optionalPost.orElse(null);
     }
 
     public Post findById2(Long id) {
         Post _post = postRepository.findById(id)
-                .orElseThrow(()-> new PostNotFoundException("Not found Post with id = " + id));
+                .orElseThrow(()-> new ResourceNotFoundException("Not found Post with id = " + id));
         return _post;
     }
 
@@ -60,7 +57,7 @@ public class PostService {
         postRepository.deleteAll();
     }
 
-    public Page<Post> paging(Pageable paging) {
+    public Page<Post> findAllByPaging(Pageable paging) {
         return postRepository.findAll(paging);
     }
 

@@ -18,7 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(nativeQuery = true, value = """
             select *
             from post
-            where title=:keyword
+            where title like concat('%',:keyword,'%')
                         """)
     List<Post> searchByKeyword(@Param("keyword") String keyword);
 

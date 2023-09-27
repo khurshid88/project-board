@@ -4,6 +4,7 @@ import com.example.projectboard.model.entity.Post;
 import com.example.projectboard.model.dto.PostDto;
 import com.example.projectboard.model.projection.PostProjection;
 import com.example.projectboard.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,7 +42,7 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<?> createPost(@RequestBody PostDto postDto){
+    public ResponseEntity<?> createPost(@Valid @RequestBody PostDto postDto){
         Post _post = postService.createPost(postDto);
         return new ResponseEntity<>(_post, HttpStatus.CREATED);
     }
@@ -58,16 +59,10 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/posts")
-    public ResponseEntity<HttpStatus> deleteAllPosts() {
-        postService.deleteAll();
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
     @GetMapping("/posts/paging")
-    public ResponseEntity<?> findByPaging(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
+    public ResponseEntity<?> findAllByPaging(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
         Pageable paging = PageRequest.of(page, size);
-        Page<Post> posts = postService.paging(paging);
+        Page<Post> posts = postService.findAllByPaging(paging);
         if(posts.isEmpty())
             return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(posts, HttpStatus.OK);

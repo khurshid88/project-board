@@ -14,7 +14,7 @@ import java.util.Objects;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class Comment extends AuditingFields{
+public class Comment extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

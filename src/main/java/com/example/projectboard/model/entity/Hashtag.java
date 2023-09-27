@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@ToString(callSuper = true)
+@ToString()
 @Table(indexes = {
         @Index(columnList = "hashtagName", unique = true),
         @Index(columnList = "createdAt"),
