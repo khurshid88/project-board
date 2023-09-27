@@ -1,5 +1,6 @@
 package com.example.projectboard.controller;
 
+import com.example.projectboard.model.dto.CustomResponse;
 import com.example.projectboard.model.entity.Post;
 import com.example.projectboard.model.dto.PostDto;
 import com.example.projectboard.model.projection.PostProjection;
@@ -21,9 +22,9 @@ public class PostController {
     PostService postService;
 
     @GetMapping("/posts")
-    public ResponseEntity<?> getAllPosts(){
+    public CustomResponse getAllPosts(){
         List<Post> posts = postService.findAll();
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+        return CustomResponse.ok(posts);
     }
 
 //    @GetMapping("/posts/{id}")
@@ -36,54 +37,54 @@ public class PostController {
 //    }
 
     @GetMapping("/posts/{id}")
-    public ResponseEntity<?> getPostById(@PathVariable("id") Long id){
+    public CustomResponse getPostById(@PathVariable("id") Long id){
         Post _post = postService.findById2(id);
-        return new ResponseEntity<>(_post, HttpStatus.OK);
+        return CustomResponse.ok(_post);
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<?> createPost(@Valid @RequestBody PostDto postDto){
+    public CustomResponse createPost(@Valid @RequestBody PostDto postDto){
         Post _post = postService.createPost(postDto);
-        return new ResponseEntity<>(_post, HttpStatus.CREATED);
+        return CustomResponse.ok(_post);
     }
 
     @PutMapping("/posts/{id}")
-    public ResponseEntity<?> updatePost(@PathVariable("id") Long id, @RequestBody PostDto postDto){
+    public CustomResponse updatePost(@PathVariable("id") Long id, @RequestBody PostDto postDto){
         Post _post = postService.updatePost(id, postDto);
-        return new ResponseEntity<>(_post, HttpStatus.ACCEPTED);
+        return CustomResponse.ok(_post);
     }
 
     @DeleteMapping("/posts/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable("id") Long id){
+    public CustomResponse deletePost(@PathVariable("id") Long id){
         postService.deletePost(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return CustomResponse.ok();
     }
 
     @GetMapping("/posts/paging")
-    public ResponseEntity<?> findAllByPaging(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
+    public CustomResponse findAllByPaging(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
         Pageable paging = PageRequest.of(page, size);
         Page<Post> posts = postService.findAllByPaging(paging);
         if(posts.isEmpty())
-            return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+            return CustomResponse.error("No posts");
+        return CustomResponse.ok(posts);
     }
 
     @GetMapping("/posts/search")
-    public ResponseEntity<?> searchByKeyword(@RequestParam String keyword){
+    public CustomResponse searchByKeyword(@RequestParam String keyword){
 
         List<Post> posts = postService.searchByKeyword(keyword);
         if(posts.isEmpty())
-            return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+            return CustomResponse.error("No posts");
+        return CustomResponse.ok(posts);
     }
 
     @GetMapping("/posts/load")
-    public ResponseEntity<?> loadPosts(){
+    public CustomResponse loadPosts(){
 
         List<PostProjection> posts = postService.loadPosts();
         if(posts.isEmpty())
-            return new ResponseEntity<>(posts, HttpStatus.NO_CONTENT);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+            return CustomResponse.error("No posts");
+        return CustomResponse.ok(posts);
     }
 
 }
