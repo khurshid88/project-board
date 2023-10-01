@@ -1,5 +1,6 @@
 package com.example.projectboard.service;
 
+import com.example.projectboard.model.common.Header;
 import com.example.projectboard.model.entity.Post;
 import com.example.projectboard.model.dto.PostDto;
 import com.example.projectboard.exception.ResourceNotFoundException;
@@ -33,7 +34,8 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post createPost(PostDto postDto) {
+    public Post createPost(Header<PostDto> dto) {
+        var postDto = dto.getData();
         Post _post = Post.of(postDto.getTitle(), postDto.getContent());
         postRepository.save(_post);
         return _post;

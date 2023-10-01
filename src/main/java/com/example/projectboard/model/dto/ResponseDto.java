@@ -7,28 +7,28 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class CustomResponse {
+public class ResponseDto {
     private String message;
     private boolean success;
     private Object data;
 
-    public static CustomResponse ok(Object data) {
-        return CustomResponse.builder()
+    public static ResponseDto ok(Object data) {
+        return ResponseDto.builder()
                 .success(true)
                 .message("OK")
                 .data(data)
                 .build();
     }
 
-    public static CustomResponse ok() {
-        return CustomResponse.builder()
+    public static ResponseDto ok() {
+        return ResponseDto.builder()
                 .success(true)
                 .message("OK")
                 .build();
     }
 
-    public static CustomResponse error(String message) {
-        return CustomResponse.builder()
+    public static ResponseDto error(String message) {
+        return ResponseDto.builder()
                 .success(false)
                 .message(message)
                 .data(null)
