@@ -2,9 +2,9 @@ package com.example.projectboard.controller;
 
 import com.example.projectboard.model.common.Header;
 import com.example.projectboard.model.common.PaginationData;
-import com.example.projectboard.model.dto.ResponseDto;
+import com.example.projectboard.model.dto.PostRes;
 import com.example.projectboard.model.entity.Post;
-import com.example.projectboard.model.dto.PostDto;
+import com.example.projectboard.model.dto.PostReq;
 import com.example.projectboard.model.projection.PostProjection;
 import com.example.projectboard.service.PostService;
 import jakarta.validation.Valid;
@@ -43,14 +43,14 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public Header<?> createPost(@Valid @RequestBody Header<PostDto> dto){
-        Post _post = postService.createPost(dto);
-        return Header.ok(_post);
+    public Header<?> createPost(@Valid @RequestBody Header<PostReq> dto){
+        Post postRes = postService.createPost(dto);
+        return Header.ok(postRes);
     }
 
     @PutMapping("/posts/{id}")
-    public Header<?> updatePost(@PathVariable("id") Long id, @RequestBody PostDto postDto){
-        Post _post = postService.updatePost(id, postDto);
+    public Header<?> updatePost(@PathVariable("id") Long id, @RequestBody Header<PostReq> dto){
+        Post _post = postService.updatePost(id, dto);
         return Header.ok(_post);
     }
 
@@ -69,9 +69,9 @@ public class PostController {
     }
 
     @GetMapping("/posts/search")
-    public Header<?> searchByKeyword(@RequestParam String keyword){
+    public Header<?> searchPostByKeyword(@RequestParam String keyword){
 
-        List<Post> posts = postService.searchByKeyword(keyword);
+        List<Post> posts = postService.searchPostByKeyword(keyword);
         if(posts.isEmpty())
             return Header.error("No posts");
         return Header.ok(posts);

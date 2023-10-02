@@ -1,5 +1,7 @@
 package com.example.projectboard.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +30,7 @@ public class Hashtag extends AuditingFields {
     private String hashtagName;
 
     //the non-owning (inverse side) - mappedBy
+    @JsonBackReference
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {

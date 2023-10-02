@@ -1,8 +1,6 @@
 package com.example.projectboard.model.dto;
 
-import com.example.projectboard.model.entity.Hashtag;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class PostDto {
+public class PostReq {
     @NotBlank(message = "title is required")
     @Size(min = 5, max = 20)
     private String title;
@@ -20,22 +18,23 @@ public class PostDto {
     @NotBlank(message = "content is required")
     @Size(min = 5, max = 500)
     private String content;
-    private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
-    protected PostDto(){}
+    private Set<Long> hashtag_ids = new LinkedHashSet<>();
 
-    private PostDto(String title, String content) {
+    protected PostReq(){}
+
+    private PostReq(String title, String content) {
         this.title = title;
         this.content = content;
     }
 
-    private PostDto(String title, String content, Set<Hashtag> hashtags) {
+    private PostReq(String title, String content, Set<Long> hashtag_ids) {
         this.title = title;
         this.content = content;
-        this.hashtags = hashtags;
+        this.hashtag_ids = hashtag_ids;
     }
 
-    public static PostDto of(String title, String content, Set<Hashtag> hashtags) {
-        return new PostDto(title, content, hashtags);
+    public static PostReq of(String title, String content, Set<Long> hashtag_ids) {
+        return new PostReq(title, content, hashtag_ids);
     }
 }
