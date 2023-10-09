@@ -25,23 +25,24 @@ public class PostController {
     PostService postService;
 
     @GetMapping("/posts")
-    public Header<?> getAllPosts(){
-        List<Post> posts = postService.findAll();
-        return Header.ok(posts);
+    public Header<?> getAllPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        Pageable paging = PageRequest.of(page, size);
+        Page<Post> postPage = postService.findAllByPaging(paging);
+        List<Post> posts = postPage.getContent();
+        return Header.ok(posts, PaginationData.build(postPage));
     }
 
-//    @GetMapping("/posts/{id}")
-//    public ResponseEntity<?> getPostById(@PathVariable("id") Long id){
-//        Post _post = postService.findById(id);
-//        if(_post != null){
-//            return new ResponseEntity<>(_post, HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    @GetMapping("/posts/search")
+    public Header<?> getSearchedPosts(@RequestParam String keyword, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        Pageable paging = PageRequest.of(page, size);
+        Page<Post> postPage = postService.searchPostByKeyword(keyword,paging);
+        List<Post> posts = postPage.getContent();
+        return Header.ok(posts, PaginationData.build(postPage));
+    }
 
     @GetMapping("/posts/{id}")
     public Header<?> getPostById(@PathVariable("id") Long id){
-        Post _post = postService.findById2(id);
+        Post _post = postService.findById(id);
         return Header.ok(_post);
     }
 
@@ -61,32 +62,6 @@ public class PostController {
     public Header<?> deletePost(@PathVariable("id") Long id){
         postService.deletePost(id);
         return Header.ok();
-    }
-
-    @GetMapping("/posts/paging")
-    public Header<?> findAllByPaging(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
-        Pageable paging = PageRequest.of(page, size);
-        Page<Post> postPage = postService.findAllByPaging(paging);
-        List<Post> posts = postPage.getContent();
-        return Header.ok(posts, PaginationData.build(postPage));
-    }
-
-    @GetMapping("/posts/search")
-    public Header<?> searchPostByKeyword(@RequestParam String keyword){
-
-        List<Post> posts = postService.searchPostByKeyword(keyword);
-        if(posts.isEmpty())
-            return Header.error("No posts");
-        return Header.ok(posts);
-    }
-
-    @GetMapping("/posts/load")
-    public Header<?> loadPosts(){
-
-        List<PostProjection> posts = postService.loadPosts();
-        if(posts.isEmpty())
-            return Header.error("No posts");
-        return Header.ok(posts);
     }
 
     @PostMapping("/posts/{postId}/comments")

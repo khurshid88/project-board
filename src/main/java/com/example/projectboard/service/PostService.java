@@ -38,20 +38,16 @@ public class PostService {
     @Autowired
     UserAccountRepository userAccountRepository;
 
-    public Post findById(Long id) {
-        Optional<Post> optionalPost = postRepository.findById(id);
-        return optionalPost.orElse(null);
+
+    public Page<Post> findAllByPaging(Pageable paging) {
+        return postRepository.findAll(paging);
     }
 
-    public Post findById2(Long id) {
+    public Post findById(Long id) {
         // TODO - convert entity to dto using mapper
         Post _post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found Post with id = " + id));
         return _post;
-    }
-
-    public List<Post> findAll() {
-        return postRepository.findAll();
     }
 
     public Post createPost(Header<PostReq> dto) {
@@ -83,19 +79,9 @@ public class PostService {
         postRepository.delete(_post);
     }
 
-    public Page<Post> findAllByPaging(Pageable paging) {
-        return postRepository.findAll(paging);
-    }
-
-    public List<Post> searchPostByKeyword(String keyword) {
+    public Page<Post> searchPostByKeyword(String keyword, Pageable paging) {
         // TODO - convert entity to dto using mapper
-        List<Post> posts = postRepository.searchPostByKeyword(keyword);
-        return posts;
-    }
-
-    public List<PostProjection> loadPosts() {
-        List<PostProjection> titles = postRepository.loadPosts();
-        return titles;
+        return postRepository.searchPostByKeyword(keyword, paging);
     }
 
     public Comment createPostComment(Long postId, Header<CommentReq> dto) {
