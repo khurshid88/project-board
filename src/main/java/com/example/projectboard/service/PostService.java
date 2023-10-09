@@ -1,14 +1,19 @@
 package com.example.projectboard.service;
 
 import com.example.projectboard.model.common.Header;
+import com.example.projectboard.model.dto.CommentReq;
 import com.example.projectboard.model.dto.HashtagRes;
 import com.example.projectboard.model.dto.PostRes;
+import com.example.projectboard.model.entity.Comment;
 import com.example.projectboard.model.entity.Hashtag;
 import com.example.projectboard.model.entity.Post;
 import com.example.projectboard.model.dto.PostReq;
 import com.example.projectboard.exception.ResourceNotFoundException;
+import com.example.projectboard.model.entity.UserAccount;
 import com.example.projectboard.model.projection.PostProjection;
+import com.example.projectboard.repository.CommentRepository;
 import com.example.projectboard.repository.PostRepository;
+import com.example.projectboard.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,12 +32,19 @@ public class PostService {
     @Autowired
     HashtagService hashtagService;
 
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
+    UserAccountRepository userAccountRepository;
+
     public Post findById(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         return optionalPost.orElse(null);
     }
 
     public Post findById2(Long id) {
+        // TODO - convert entity to dto using mapper
         Post _post = postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found Post with id = " + id));
         return _post;
@@ -44,7 +56,7 @@ public class PostService {
 
     public Post createPost(Header<PostReq> dto) {
         var postDto = dto.getData();
-        // TODO: mapper should be implement to convert PostReq to Post
+        // TODO - convert entity to dto using mapper
         Post _post = Post.of(postDto.getTitle(), postDto.getContent());
 
         for (Long hashtag_id : postDto.getHashtag_ids()) {
@@ -56,6 +68,7 @@ public class PostService {
     }
 
     public Post updatePost(Long id, Header<PostReq> dto) {
+        // TODO - convert entity to dto using mapper
         Post _post = postRepository.findById(id).orElseThrow();
         var postDto = dto.getData();
         _post.setTitle(postDto.getTitle());
@@ -75,6 +88,7 @@ public class PostService {
     }
 
     public List<Post> searchPostByKeyword(String keyword) {
+        // TODO - convert entity to dto using mapper
         List<Post> posts = postRepository.searchPostByKeyword(keyword);
         return posts;
     }
@@ -83,4 +97,40 @@ public class PostService {
         List<PostProjection> titles = postRepository.loadPosts();
         return titles;
     }
+
+    public Comment createPostComment(Long postId, Header<CommentReq> dto) {
+        var commentDto = dto.getData();
+        UserAccount userAccount = userAccountRepository.findByUserId(commentDto.getUserId()).orElseThrow();
+        Post post = postRepository.findById(postId).orElseThrow();
+
+        Comment comment = Comment.of(commentDto.getContent());
+        comment.setPost(post);
+        comment.setUserAccount(userAccount);
+        return commentRepository.save(comment);
+    }
+
+    public Page<Comment> getPostComments(Long postId, Pageable paging) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        return commentRepository.findByPostId(post.getId(), paging);
+    }
+
+    public Comment getPostComment(Long postId, Long commentId) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        Comment comment = commentRepository.findById(commentId).orElseThrow();
+        return comment;
+    }
+
+    public Comment updatePostComment(Long postId, Long commentId, Header<CommentReq> dto) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        Comment comment = commentRepository.findById(commentId).orElseThrow();
+        comment.setContent(dto.getData().getContent());
+        return commentRepository.save(comment);
+    }
+
+    public void deletePostComment(Long postId, Long commentId) {
+        Post post = postRepository.findById(postId).orElseThrow();
+        Comment comment = commentRepository.findById(commentId).orElseThrow();
+        commentRepository.delete(comment);
+    }
+
 }

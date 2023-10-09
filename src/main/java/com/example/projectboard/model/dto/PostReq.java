@@ -21,20 +21,5 @@ public class PostReq {
 
     private Set<Long> hashtag_ids = new LinkedHashSet<>();
 
-    protected PostReq(){}
 
-    private PostReq(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
-    private PostReq(String title, String content, Set<Long> hashtag_ids) {
-        this.title = title;
-        this.content = content;
-        this.hashtag_ids = hashtag_ids;
-    }
-
-    public static PostReq of(String title, String content, Set<Long> hashtag_ids) {
-        return new PostReq(title, content, hashtag_ids);
-    }
 }

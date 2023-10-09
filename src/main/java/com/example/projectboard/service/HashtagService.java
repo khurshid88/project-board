@@ -20,11 +20,13 @@ public class HashtagService {
     }
 
     public Hashtag getHashtag(Long id) {
+        // TODO - convert entity to dto using mapper
         Hashtag _hashtag = hashtagRepository.findById(id).orElseThrow();
         return _hashtag;
     }
 
     public Hashtag createHashtag(Header<HashtagReq> dto) {
+        // TODO - convert entity to dto using mapper
         var hashtagDto = dto.getData();
         Hashtag hashtag = Hashtag.of(hashtagDto.getHashtagName());
 

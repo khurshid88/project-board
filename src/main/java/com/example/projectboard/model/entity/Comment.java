@@ -1,5 +1,8 @@
 package com.example.projectboard.model.entity;
 
+import com.example.projectboard.model.dto.CommentReq;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +22,7 @@ public class Comment extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @Setter
     @ManyToOne(optional = false)
     private Post post;
@@ -27,10 +31,23 @@ public class Comment extends AuditingFields {
     @Column(nullable = false, length = 500)
     private String content;
 
+    @JsonBackReference
+    @Setter
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private UserAccount userAccount;
+
+    protected Comment() {
+    }
+
+    private Comment(String content) {
+        this.content = content;
+    }
+
+    public static Comment of(String content) {
+        return new Comment(content);
+    }
 
     @Override
     public boolean equals(Object o) {
